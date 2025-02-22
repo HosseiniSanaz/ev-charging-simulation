@@ -5,12 +5,11 @@ import type IFormParams from "types/form-params.type"
 function App() {
 
     const runSimulation = async (formData: FormData): Promise<IFormParams> => {
-        console.log('runSimulation', formData)
         return {
-            chargePoints: 1,
-            arrivalProbability: 0.5,
-            carConsumption: 10,
-            chargingPower: 10,
+            chargePoints: Number(formData.get('chargePoints')) || 0,
+            arrivalProbability: Number(formData.get('arrivalProbability')) || 0,
+            carConsumption: Number(formData.get('carConsumption')) || 0,
+            chargingPower: Number(formData.get('chargingPower')) || 0,
         }
     }
 
