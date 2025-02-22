@@ -93,7 +93,7 @@ const InputForm: React.FC<IFormProps> = ({runSimulation}) => {
                     )}
                 </div>
 
-                <Button type="submit" className="mt-2">Run Simulation</Button>
+                <Button type="submit" fullWidth size="large" className="mt-2">Run Simulation</Button>
             </form>
         </div>
     )
