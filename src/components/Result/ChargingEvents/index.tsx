@@ -7,7 +7,7 @@ function ChargingEvents({events}: IChargingEventsProps) {
             <Header>Charging Events</Header>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {events.map((item: any) => (
-                    <Event period={item.period} events={item.events}/>
+                    <Event key={item.period} period={item.period} events={item.events}/>
                 ))}
             </div>
         </div>

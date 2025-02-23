@@ -1,36 +1,58 @@
 import type React from "react"
-import {useForm, SubmitHandler} from "react-hook-form"
+import { useForm, SubmitHandler, set } from "react-hook-form"
 import IFormProps from "./form.type"
 import IFormParams from "types/form-params.type"
 import Input from "components/ui/input"
 import Button from "components/ui/button"
+import { useCallback, useState } from "react"
 
 
-const InputForm: React.FC<IFormProps> = ({runSimulation}) => {
+const InputForm: React.FC<IFormProps> = ({ runSimulation }) => {
     const {
         register,
         handleSubmit,
-        formState: {errors}
+        formState: { errors },
+        watch,
+        reset,
     } = useForm<IFormParams>({
         defaultValues: {
             chargePoints: 20,
             chargingPower: 11,
             arrivalProbability: 100,
             carConsumption: 18
-        }
+        },
+        mode: "onChange"
     });
+    const [loading, setLoading] = useState(false);
 
-    const onSubmit: SubmitHandler<IFormParams> = async (data) => {
+    const chargePoints = watch("chargePoints");
+    const chargingPower = watch("chargingPower");
+
+    const onSubmit: SubmitHandler<IFormParams> = useCallback(async (data) => {
+        setLoading(true);
         try {
             const formData = new FormData();
             Object.entries(data).forEach(([key, value]) => {
                 formData.append(key, value.toString());
             });
             await runSimulation(formData);
+            reset();
         } catch (err) {
             console.error(err);
+        } finally {
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
         }
+    }, [runSimulation]);
+
+    const validateTotalPower = (value: number, otherValue: number) => {
+        const numValue = Number(value);
+        const numOtherValue = Number(otherValue);
+        return (numValue && numOtherValue && numValue * numOtherValue <= 220) ||
+            "Total power (Charge Points × Charging Power) must not exceed 220kW";
     };
+
 
     return (
         <div>
@@ -39,61 +61,55 @@ const InputForm: React.FC<IFormProps> = ({runSimulation}) => {
                     <Input
                         type="number"
                         label="Number of Charge Points"
+                        error={errors.chargePoints?.message}
                         {...register("chargePoints", {
                             required: "This field is required",
-                            min: {value: 1, message: "Minimum value is 1"},
-                            max: {value: 100, message: "Maximum value is 100"}
+                            min: { value: 1, message: "Minimum value is 1" },
+                            max: { value: 100, message: "Maximum value is 100" },
+                            validate: (value) => validateTotalPower(value, chargingPower)
                         })}
                     />
-                    {errors.chargePoints && (
-                        <p className="mt-1 text-sm text-red-600">{errors.chargePoints.message}</p>
-                    )}
                 </div>
 
                 <div>
                     <Input
                         type="number"
                         label="Charging Power per Point (kW)"
+                        error={errors.chargingPower?.message}
                         {...register("chargingPower", {
                             required: "This field is required",
-                            min: {value: 1, message: "Minimum value is 1"},
+                            min: { value: 1, message: "Minimum value is 1" },
+                            validate: (value) => validateTotalPower(value, chargePoints)
                         })}
                     />
-                    {errors.chargingPower && (
-                        <p className="mt-1 text-sm text-red-600">{errors.chargingPower.message}</p>
-                    )}
                 </div>
 
                 <div>
                     <Input
                         type="number"
                         label="Arrival Probability Multiplier (%)"
+                        error={errors.arrivalProbability?.message}
                         {...register("arrivalProbability", {
                             required: "This field is required",
-                            min: {value: 20, message: "Minimum value is 20"},
-                            max: {value: 200, message: "Maximum value is 200"}
+                            min: { value: 20, message: "Minimum value is 20" },
+                            max: { value: 200, message: "Maximum value is 200" }
                         })}
                     />
-                    {errors.arrivalProbability && (
-                        <p className="mt-1 text-sm text-red-600">{errors.arrivalProbability.message}</p>
-                    )}
                 </div>
 
                 <div>
                     <Input
                         type="number"
                         label="Car Consumption (kWh)"
+                        error={errors.carConsumption?.message}
                         {...register("carConsumption", {
                             required: "This field is required",
-                            min: {value: 1, message: "Minimum value is 1"},
+                            min: { value: 1, message: "Minimum value is 1" },
                         })}
                     />
-                    {errors.carConsumption && (
-                        <p className="mt-1 text-sm text-red-600">{errors.carConsumption.message}</p>
-                    )}
                 </div>
 
-                <Button type="submit" fullWidth size="large" className="mt-2">Run Simulation</Button>
+                <Button type="submit" fullWidth size="large" className="mt-2" loading={loading}>Run Simulation</Button>
             </form>
         </div>
     )

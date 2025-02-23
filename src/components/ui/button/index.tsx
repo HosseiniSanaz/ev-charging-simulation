@@ -1,12 +1,15 @@
+import Spinner from "../Spinner"
 import IButtonProps from "./button.type"
 
 function Button(
     {
         children,
-        className,
+        className = "",
         variant = "primary",
         size = "medium",
         fullWidth = false,
+        loading = false,
+        disabled = false,
         ...props
     }: IButtonProps) {
     const variantClasses = {
@@ -20,13 +23,17 @@ function Button(
         large: "py-4 px-6 text-lg",
     }
     const fullWidthClasses = fullWidth ? "w-full" : ""
+    const loadingClasses = loading || disabled ? "opacity-50 cursor-not-allowed" : ""
+
     return (
         <button
-            className={`${fullWidthClasses} ${variantClasses[variant]} ${sizeClasses[size]} border border-transparent rounded-md shadow-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2` + " " + className}
+            className={`${fullWidthClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${loadingClasses} border border-transparent rounded-md shadow-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 flex items-center justify-center gap-2` + " " + className}
             {...props}>
+            {loading && <Spinner />}
             {children}
         </button>
     )
 }
+
 
 export default Button
