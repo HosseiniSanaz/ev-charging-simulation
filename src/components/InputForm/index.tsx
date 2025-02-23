@@ -1,5 +1,5 @@
 import type React from "react"
-import { useForm, SubmitHandler, set } from "react-hook-form"
+import { useForm, SubmitHandler } from "react-hook-form"
 import IFormProps from "./form.type"
 import IFormParams from "types/form-params.type"
 import Input from "components/ui/input"
