@@ -10,6 +10,7 @@ function Button(
         fullWidth = false,
         loading = false,
         disabled = false,
+        icon,
         ...props
     }: IButtonProps) {
     const variantClasses = {
@@ -29,7 +30,8 @@ function Button(
         <button
             className={`${fullWidthClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${loadingClasses} border border-transparent rounded-md shadow-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 flex items-center justify-center gap-2` + " " + className}
             {...props}>
-            {loading && <Spinner />}
+            {loading && <Spinner/>}
+            {icon && <span className="material-symbols-outlined">{icon}</span>}
             {children}
         </button>
     )

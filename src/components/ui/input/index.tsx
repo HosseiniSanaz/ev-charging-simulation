@@ -5,11 +5,12 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(({
     name,
     label,
     className = "",
+    containerClassName = "",
     error,
     ...props
 }, ref) => {
     return (
-        <div className="flex flex-col gap-2 items-start">
+        <div className={"flex flex-col gap-2 items-start "+ containerClassName}>
             <label htmlFor={name} className="block text-sm font-medium text-gray-700">
                 {label}
             </label>
