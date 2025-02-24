@@ -17,6 +17,7 @@ You can access the live demo of the application via the following link:
   - Charging power per point (kW)
   - Arrival probability multiplier (20-200%)
   - Car consumption (kWh)
+- Ability to have dynamic charge points with different charging power
 - Total power management (maximum 220kW)
 - Visual data representation
 
@@ -76,5 +77,6 @@ yarn build
 - types # General types definitions
 - utils # Utility functions
 - hooks # Hooks like useMockData
+- constants # Define static values
 
 
