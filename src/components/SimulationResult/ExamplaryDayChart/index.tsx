@@ -10,7 +10,12 @@ const ExemplaryDayChart = ({data}: IExamplaryDayChartProps) => {
                 <AreaChart data={data} margin={{top: 50}}>
                     <CartesianGrid strokeDasharray="3 3"/>
                     <XAxis dataKey="time"/>
-                    <YAxis/>
+                    <YAxis label={{
+                        value: 'Power (kWh)',
+                        angle: -90,
+                        position: 'insideLeft',
+                        style: { textAnchor: 'middle', left: 10 }
+                    }} />
                     <Tooltip/>
                     <Legend/>
                     <Area 

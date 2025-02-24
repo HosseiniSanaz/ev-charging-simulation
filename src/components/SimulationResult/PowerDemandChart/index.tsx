@@ -18,7 +18,12 @@ const PowerDemandChart = ({data}: IPowerDemandChartProps) => {
                 <BarChart data={data[view]}>
                     <CartesianGrid strokeDasharray="3 3"/>
                     <XAxis dataKey={xAxisKey}/>
-                    <YAxis/>
+                    <YAxis label={{
+                        value: 'Power (kW)',
+                        angle: -90,
+                        position: 'insideLeft',
+                        style: { textAnchor: 'middle' }
+                    }}/>
                     <Tooltip/>
                     <Legend/>
                     <Bar dataKey={barKey} fill="#1c398e"/>

@@ -11,7 +11,12 @@ const AggregatedChart = ({ data }: IChargingValuesProps) => {
                 <LineChart data={data} width={400} height={400} margin={{ top: 20, bottom: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="time" />
-                    <YAxis />
+                    <YAxis label={{
+                        value: 'Power (kWh)',
+                        angle: -90,
+                        position: 'insideLeft',
+                        style: { textAnchor: 'middle' }
+                    }} />
                     <Tooltip />
                     <Legend />
                     {Object.keys(data[0] || {})
