@@ -1,7 +1,5 @@
-import type IFormParams from "types/form-params.type"
-
 interface IFormProps {
-    runSimulation: (formData: FormData) => Promise<IFormParams>
+    runSimulation: (formData: FormData) => Promise<void>
 }
 
 export default IFormProps;

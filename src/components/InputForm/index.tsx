@@ -13,7 +13,6 @@ const InputForm: React.FC<IFormProps> = ({ runSimulation }) => {
         handleSubmit,
         formState: { errors },
         watch,
-        reset,
     } = useForm<IFormParams>({
         defaultValues: {
             chargePoints: 20,
@@ -36,7 +35,6 @@ const InputForm: React.FC<IFormProps> = ({ runSimulation }) => {
                 formData.append(key, value.toString());
             });
             await runSimulation(formData);
-            reset();
         } catch (err) {
             console.error(err);
         } finally {
