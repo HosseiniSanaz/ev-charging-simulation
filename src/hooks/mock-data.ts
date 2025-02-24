@@ -1,12 +1,13 @@
-import { generateChargingValuesPerHour, generateExamplaryDayData } from "utils/chargingValues";
+import { calculatePeakPower, calculateTotalEnergy, generateChargingValuesPerHour, generateExamplaryDayData } from "utils/generateReport";
 import IResultProps from "components/SimulationResult/result.type"
-import { ChargingPair } from "types/form-params.type";
+import IFormParams from "types/form-params.type";
 
-const mockData = (chargingPairs: ChargingPair[]): IResultProps => {
-    const chargingValues = generateChargingValuesPerHour(chargingPairs)
+const mockData = (input: IFormParams): IResultProps => {
+    const chargingValues = generateChargingValuesPerHour(input.chargingPairs)
 
     const result: IResultProps = {
-        totalChargingEvents: 3650,
+        totalChargingEvents: calculateTotalEnergy(input),
+        peakPower: calculatePeakPower(input),
         chargingValues: chargingValues,
         chargingEvents: [
             {period: 'Year', events: 3650},

@@ -5,6 +5,7 @@ import IPowerDemandProps from "./PowerDemandChart/power-demand.type"
 
 interface IResultProps {
     totalChargingEvents: number,
+    peakPower: number,
     chargingValues: IChargingValue[],
     chargingEvents: IEvent[],
     exemplaryDay: IExamplaryDay[],

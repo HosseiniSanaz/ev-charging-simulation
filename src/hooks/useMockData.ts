@@ -1,8 +1,8 @@
-import { ChargingPair } from "types/form-params.type";
+import IFormParams from "types/form-params.type";
 import mockData from "./mock-data"
 
-function useMockData(chargingPairs: ChargingPair[]) {
-    const mockResult = mockData(chargingPairs);
+function useMockData(input: IFormParams) {
+    const mockResult = mockData(input);
     return mockResult
 }
 

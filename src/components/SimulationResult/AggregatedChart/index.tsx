@@ -1,11 +1,11 @@
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from 'recharts';
 import IChargingValuesProps from "./aggregated.type";
-import Header from '../Header';
+import ReportSectionHeader from 'components/ui/ReportSectionHeader';
 
 const AggregatedChart = ({data}: IChargingValuesProps) => {
     return (
         <div className="flex flex-col gap-1">
-            <Header>Aggregated Chart</Header>
+            <ReportSectionHeader>Daily Charging Points Activity</ReportSectionHeader>
 
             <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={data}>

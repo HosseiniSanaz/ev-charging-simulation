@@ -3,7 +3,7 @@ import {ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Leg
 import PowerDemandFilter from "./Filters";
 import IPowerDemandChartProps from "./power-demand.type";
 import {ViewType} from "./filter-type";
-import Header from "../Header";
+import ReportSectionHeader from "components/ui/ReportSectionHeader";
 
 const PowerDemandChart = ({data}: IPowerDemandChartProps) => {
     const [view, setView] = useState<ViewType>(ViewType.Hourly);
@@ -12,7 +12,7 @@ const PowerDemandChart = ({data}: IPowerDemandChartProps) => {
 
     return (
         <div className="flex flex-col gap-1">
-            <Header>Power Demand Chart</Header>
+            <ReportSectionHeader>Power Demand Chart</ReportSectionHeader>
             <PowerDemandFilter view={view} setView={setView}/>
             <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={data[view]}>

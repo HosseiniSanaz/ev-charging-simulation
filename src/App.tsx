@@ -12,7 +12,7 @@ function App() {
         arrivalProbability: 0,
         carConsumption: 0,
     })
-    const simulationResult: IResultProps = useMockData(formData.chargingPairs)
+    const simulationResult: IResultProps = useMockData(formData)
 
     const showSimulation = useMemo(() => formData.chargingPairs.length > 0 && formData.chargingPairs.every((pair) => pair.chargePoints > 0 && pair.chargingPower > 0), [formData.chargingPairs])
 

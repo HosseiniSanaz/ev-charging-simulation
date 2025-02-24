@@ -1,11 +1,11 @@
 import {ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line} from "recharts";
 import IExamplaryDayChartProps from "./examplary-day.type"
-import Header from "../Header";
+import ReportSectionHeader from "components/ui/ReportSectionHeader";
 
 const ExemplaryDayChart = ({data}: IExamplaryDayChartProps) => {
     return (
         <div className="flex flex-col gap-1">
-            <Header>Exemplary Day Chart</Header>
+            <ReportSectionHeader>Exemplary Day Chart</ReportSectionHeader>
             <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={data} margin={{top: 50}}>
 

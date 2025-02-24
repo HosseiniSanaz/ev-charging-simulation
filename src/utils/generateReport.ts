@@ -1,6 +1,6 @@
 import { IChargingValue } from "components/SimulationResult/AggregatedChart/aggregated.type";
 import { IExamplaryDay } from "components/SimulationResult/ExamplaryDayChart/examplary-day.type";
-import { ChargingPair } from "types/form-params.type";
+import IFormParams, { ChargingPair } from "types/form-params.type";
 import { MAX_CHARGING_POWER } from "constants/index"
 ;
 export function generateRandomChargingValues(chargingPairs: ChargingPair[]): IChargingValue[] {
@@ -67,4 +67,15 @@ export const generateExamplaryDayData = (data: IChargingValue[]): IExamplaryDay[
         }
     })
     return result
+}
+
+export const calculateTotalEnergy = (data: IFormParams): number => {
+    const chargePoints = data.chargingPairs.reduce((acc, pair) => acc + pair.chargePoints, 0);
+
+    return chargePoints * data.carConsumption * (data.arrivalProbability / 100) * 24;
+}
+
+export const calculatePeakPower = (data: IFormParams): number => {
+    const peakPower = data.chargingPairs.reduce((acc, pair) => acc + pair.chargePoints * pair.chargingPower, 0);
+    return peakPower * data.arrivalProbability / 100 * 24;
 }

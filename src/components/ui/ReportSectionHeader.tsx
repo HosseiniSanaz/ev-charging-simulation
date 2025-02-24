@@ -1,4 +1,4 @@
-function Header({children}: { children: React.ReactNode }) {
+function ReportSectionHeader({children}: { children: React.ReactNode }) {
     return (
         <h2 className="text-lg font-semibold text-gray-800">
             {children}
@@ -6,4 +6,4 @@ function Header({children}: { children: React.ReactNode }) {
     )
 }
 
-export default Header
+export default ReportSectionHeader

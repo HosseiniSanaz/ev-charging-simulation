@@ -16,7 +16,7 @@ function IconButton({ icon, size = "medium", variant = "primary", disabled = fal
     const loadingClasses = disabled ? "opacity-50 cursor-not-allowed" : ""
     return (
         <button {...props} className={`${loadingClasses} w-fit h-fit ${className}`}>
-            <span className={`material-symbols-outlined ${variantClasses[variant]} ${sizeClasses[size]}`}>{icon}</span>
+            <span className={`material-symbols-outlined ${variantClasses[variant]} ${sizeClasses[size]} cursor-pointer`}>{icon}</span>
         </button>
     )
 }
