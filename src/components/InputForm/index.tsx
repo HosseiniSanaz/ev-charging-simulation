@@ -30,17 +30,17 @@ const InputForm: React.FC<IFormProps> = ({ runSimulation }) => {
     const onSubmit: SubmitHandler<IFormParams> = useCallback(async (data) => {
         setLoading(true);
         try {
-            const formData = new FormData();
-            Object.entries(data).forEach(([key, value]) => {
-                formData.append(key, value.toString());
-            });
-            await runSimulation(formData);
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setTimeout(() => {
+            setTimeout(async () => {
+                const formData = new FormData();
+                Object.entries(data).forEach(([key, value]) => {
+                    formData.append(key, value.toString());
+                });
+                await runSimulation(formData);
                 setLoading(false);
             }, 1000);
+        } catch (err) {
+            console.error(err);
+            setLoading(false);
         }
     }, [runSimulation]);
 
