@@ -8,21 +8,19 @@ import { useMemo, useState } from 'react'
 
 function App() {
     const [formData, setFormData] = useState<IFormParams>({
-        chargePoints: 0,
+        chargingPairs: [],
         arrivalProbability: 0,
         carConsumption: 0,
-        chargingPower: 0,
     })
-    const simulationResult: IResultProps = useMockData({ numChargePoints: formData.chargePoints, chargingPower: formData.chargingPower })
+    const simulationResult: IResultProps = useMockData(formData.chargingPairs)
 
-    const showSimulation = useMemo(() => formData.chargePoints > 0 && formData.chargingPower > 0, [formData])
+    const showSimulation = useMemo(() => formData.chargingPairs.length > 0 && formData.chargingPairs.every((pair) => pair.chargePoints > 0 && pair.chargingPower > 0), [formData.chargingPairs])
 
     const runSimulation = async (formData: FormData): Promise<void> => {
         setFormData({
-            chargePoints: Number(formData.get('chargePoints')) || 0,
+            chargingPairs: JSON.parse(formData.get('chargingPairs') as string) || [],
             arrivalProbability: Number(formData.get('arrivalProbability')) || 0,
             carConsumption: Number(formData.get('carConsumption')) || 0,
-            chargingPower: Number(formData.get('chargingPower')) || 0,
         })
     }
 

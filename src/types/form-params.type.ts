@@ -1,8 +1,12 @@
+export interface ChargingPair {
+    chargePoints: number;
+    chargingPower: number;
+}
+
 interface IFormParams {
-    chargePoints: number
-    arrivalProbability: number
-    carConsumption: number
-    chargingPower: number
+    chargingPairs: ChargingPair[];
+    arrivalProbability: number;
+    carConsumption: number;
 }
 
 export default IFormParams;

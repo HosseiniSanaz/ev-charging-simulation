@@ -1,9 +1,9 @@
 import { generateChargingValuesPerHour, generateExamplaryDayData } from "utils/chargingValues";
 import IResultProps from "components/SimulationResult/result.type"
-import IMockData from "./mock-data.type"
+import { ChargingPair } from "types/form-params.type";
 
-const mockData = ({numChargePoints, chargingPower}: IMockData): IResultProps => {
-    const chargingValues = generateChargingValuesPerHour(numChargePoints, chargingPower)
+const mockData = (chargingPairs: ChargingPair[]): IResultProps => {
+    const chargingValues = generateChargingValuesPerHour(chargingPairs)
 
     const result: IResultProps = {
         totalChargingEvents: 3650,
